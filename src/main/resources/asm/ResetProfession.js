@@ -4,23 +4,23 @@ var InsnNode = Java.type('org.objectweb.asm.tree.InsnNode')
 
 function initializeCoreMod() {
     return {
-    	'ChangeJobTask': {
+    	'ResetProfession': {
     		'target': {
     			'type': 'CLASS',
-    			'name': 'net.minecraft.entity.ai.brain.task.ChangeJobTask'
+    			'name': 'net.minecraft.world.entity.ai.behavior.ResetProfession'
     		},
     		'transformer': function(classNode) {
     			var count = 0
-    			var fn = asmapi.mapMethod('func_212832_a_') // shouldExecute
+    			var fn = asmapi.mapMethod('m_6114_') // checkExtraStartConditions
     			for (var i = 0; i < classNode.methods.size(); ++i) {
     				var obj = classNode.methods.get(i)
     				if (obj.name == fn && (obj.access & opc.ACC_SYNTHETIC) == 0) {
-    					patch_func_212832_a(obj)
+    					patch_m_6114_(obj)
     					count++
     				}
     			}
     			if (count < 1)
-    				asmapi.log("ERROR", "Failed to modify ChangeJobTask: Method not found")
+    				asmapi.log("ERROR", "Failed to modify ResetProfession: Method not found")
     			return classNode;
     		}
     	}
@@ -28,7 +28,7 @@ function initializeCoreMod() {
 }
 
 // add return false
-function patch_func_212832_a(obj) {
+function patch_m_6114_(obj) {
 	var op1 = new InsnNode(opc.ICONST_0)
 	var op2 = new InsnNode(opc.IRETURN)
 	var list = asmapi.listOf(op1, op2)
