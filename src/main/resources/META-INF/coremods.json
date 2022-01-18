@@ -1,3 +1,4 @@
 {
-	"ChangeJobTask": "asm/ChangeJobTask.js"
+	"ChangeJobTask": "asm/ChangeJobTask.js",
+	"ZombieVillager": "asm/ZombieVillager.js"
 }
