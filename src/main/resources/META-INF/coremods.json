@@ -1,3 +1,4 @@
 {
-	"ResetProfession": "asm/ResetProfession.js"
+	"ResetProfession": "asm/ResetProfession.js",
+	"ZombieVillager": "asm/ZombieVillager.js"
 }
