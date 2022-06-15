@@ -15,7 +15,8 @@ function initializeCoreMod() {
 				for (var i = 0; i < classNode.methods.size(); ++i) {
 					var obj = classNode.methods.get(i)
 					if (obj.name == fn) {
-						patch_m_34398_(obj)
+						if (!checkPatched(obj))
+							patch_m_34398_(obj)
 						count++
 					}
 				}
@@ -29,7 +30,7 @@ function initializeCoreMod() {
 
 // add refreshBrain call
 function patch_m_34398_(obj) {
-	var fn = asmapi.mapMethod('m_141967_') // setVillagerData
+	var fn = asmapi.mapMethod('m_34375_') // setVillagerData
 	var owner = "net/minecraft/world/entity/npc/Villager"
 	var node = asmapi.findFirstMethodCall(obj, asmapi.MethodType.VIRTUAL, owner, fn, "(Lnet/minecraft/world/entity/npc/VillagerData;)V")
 	if (node) {	
@@ -43,4 +44,12 @@ function patch_m_34398_(obj) {
 	}
 	else
 		asmapi.log("ERROR", "Failed to modify ZombieVillager: set not found")
+}
+
+function checkPatched(obj) {
+	var fn = asmapi.mapMethod('m_35483_') // refreshBrain
+	var owner = "net/minecraft/world/entity/npc/Villager"
+	var desc = "(Lnet/minecraft/server/level/ServerLevel;)V"
+	var node = asmapi.findFirstMethodCall(obj, asmapi.MethodType.VIRTUAL, owner, fn, desc)
+	return (node != null);
 }
