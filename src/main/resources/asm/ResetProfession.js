@@ -11,11 +11,11 @@ function initializeCoreMod() {
     		},
     		'transformer': function(classNode) {
     			var count = 0
-    			var fn = asmapi.mapMethod('m_258077_') // lambda$create$0
+    			var fn = "lambda$create$0"
     			for (var i = 0; i < classNode.methods.size(); ++i) {
     				var obj = classNode.methods.get(i)
     				if (obj.name == fn) {
-    					patch_m_258077_(obj)
+    					patch_create0(obj)
     					count++
     				}
     			}
@@ -28,7 +28,7 @@ function initializeCoreMod() {
 }
 
 // add return false
-function patch_m_258077_(obj) {
+function patch_create0(obj) {
 	var op1 = new InsnNode(opc.ICONST_0)
 	var op2 = new InsnNode(opc.IRETURN)
 	var list = asmapi.listOf(op1, op2)

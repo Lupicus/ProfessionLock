@@ -1,8 +1,6 @@
 {
     "pack": {
-        "description": {
-            "text": "Profession Lock resources"
-        },
-        "pack_format": 15
+        "description": "Profession Lock resources",
+        "pack_format": 32
     }
 }
